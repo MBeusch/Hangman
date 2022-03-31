@@ -22,7 +22,7 @@ def start(word):
     Suche ein Anfangswort und gebe Anzahl an Buchstaben in Strichen aus.
     '''
 
-    print('\nFinde das Wort! \n')
+    print('⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝\nFinde das Wort! \n⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝\n')
     string = '___ '*len(word)
     print(string, '\n')
 
@@ -38,11 +38,16 @@ def compareLetters(word, letter):
     #letter = letter.upper()
 
     if letter in word:
-        indices = [index for index, l in enumerate(word) if l == letter]
-        rightLetters.append(letter)
-        dummyList = [letter]*len(indices)
-        dummyLetters += dummyList
-        return indices
+        if letter in dummyLetters:
+            print('Buchstabe bereits erraten!')
+            new_letter = input('Neuer Buchstabe:   ')
+            compareLetters(word, new_letter.upper())
+        else:
+            indices = [index for index, l in enumerate(word) if l == letter]
+            rightLetters.append(letter)
+            dummyList = [letter]*len(indices)
+            dummyLetters += dummyList
+            return indices
     else:
         wrongLetters.append(letter)
         return False
@@ -112,7 +117,10 @@ def print_underscores(word):
             output += str(c) + ' '
         else:
             output+='__ '
-    print(output+ wrongString +'\n')
+    if wrongGuesses==0:
+        print(output +'\n')
+    else:
+        print(output+ wrongString +'\n')
 
 
 
@@ -143,17 +151,49 @@ def play(word):
 
     if wrongGuesses > 9:
         print('Du bist ein absoluter LOSER!')
+        print(f'Die Lösung ist: {word}')
     else:
         print('Prima, du hast das Spiel hart gerockt!')
 
 
 
+def repeatGame(question):
+    '''
+    Methode gibt Boolean aus, der entscheidet ob Spiel weiter geht oder beendet wird.
+    '''
+    if question=='yes':
+        return True
+    elif question=='no':
+        return False
+    else:
+        print('Ungültige Eingabe!')
+        new_question = input('Eine Runde spielen? (yes/no) ')
+        return repeatGame(new_question)
+        
+
 
 def main():
-    word = getWord()  #Wort aus Liste zufällig wählen
-    #print(word)
-    start(word)       #Erster Hint in Form von Strichen
-    play(word)
+
+    #Spielwiederholung
+    game = True
+    global rightLetters
+    global dummyLetters
+    global wrongLetters
+    global wrongGuesses
+
+    while game:
+        rightLetters = []   
+        dummyLetters = []   
+        wrongLetters = []
+        wrongGuesses = 0
+
+        word = getWord()  #Wort aus Liste zufällig wählen
+        start(word)       #Erster Hint in Form von Strichen
+        play(word)
+    
+        question = input('Eine Runde spielen? (yes/no) ') #Spiel von Neuem starten?
+        game = repeatGame(question)
+        print('\n')
 
 
 
