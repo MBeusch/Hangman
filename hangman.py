@@ -22,9 +22,9 @@ def start(word):
     Suche ein Anfangswort und gebe Anzahl an Buchstaben in Strichen aus.
     '''
 
-    print('⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝\nFinde das Wort! \n⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝\n')
+    print('⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝\n                           Finde das Wort! \n⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝⚝\n')
     string = '___ '*len(word)
-    print(string, '\n')
+    print('                    ', string, '\n')
 
 
 
@@ -147,13 +147,15 @@ def play(word):
             drawHangman(wrongGuesses)
             print_underscores(word)
         else:
+            drawHangman(wrongGuesses)
             print_underscores(word)
+
 
     if wrongGuesses > 9:
         print('Du bist ein absoluter LOSER!')
-        print(f'Die Lösung ist: {word}')
+        print(f'Die Lösung ist: {word} \n')
     else:
-        print('Prima, du hast das Spiel hart gerockt!')
+        print('Prima, du hast das Spiel hart gerockt! \n')
 
 
 
@@ -161,13 +163,13 @@ def repeatGame(question):
     '''
     Methode gibt Boolean aus, der entscheidet ob Spiel weiter geht oder beendet wird.
     '''
-    if question=='yes':
+    if question=='y':
         return True
-    elif question=='no':
+    elif question=='n':
         return False
     else:
         print('Ungültige Eingabe!')
-        new_question = input('Eine Runde spielen? (yes/no) ')
+        new_question = input('Eine Runde spielen? (y/n) ')
         return repeatGame(new_question)
         
 
@@ -191,7 +193,7 @@ def main():
         start(word)       #Erster Hint in Form von Strichen
         play(word)
     
-        question = input('Eine Runde spielen? (yes/no) ') #Spiel von Neuem starten?
+        question = input('Eine Runde spielen? (y/n) ') #Spiel von Neuem starten?
         game = repeatGame(question)
         print('\n')
 
