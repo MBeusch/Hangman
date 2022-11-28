@@ -6,7 +6,7 @@ rightLetters = []   #Zustand des Spiels, erratene Buchstaben
 dummyLetters = []   #erratene Buchstaben mit entsprechender Häufigkeit im Wort um zu prüfen, ob Wort schon erraten wurde
 wrongLetters = []
 wrongGuesses = 0
-word_list = np.loadtxt('words.txt', dtype='str')
+word_list = np.loadtxt('words_DE.txt', dtype='str')
 
 
 def getWord():
