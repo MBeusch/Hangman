@@ -6,8 +6,17 @@ rightLetters = []   #Zustand des Spiels, erratene Buchstaben
 dummyLetters = []   #erratene Buchstaben mit entsprechender Häufigkeit im Wort um zu prüfen, ob Wort schon erraten wurde
 wrongLetters = []
 wrongGuesses = 0
-word_list = np.loadtxt('words_DE.txt', dtype='str')
+word_list = None
 
+
+language = input('Gebe "DE/de" ein um die deutsche Version zu spielen! | Insert "EN/en for playing the English version!"')  #Eingabe eines Buchstabens im Terminal
+
+if language=='EN' or language=='en':
+    word_list = np.loadtxt('words_EN.txt', dtype='str')
+elif language=='DE' or language=='de':
+    word_list = np.loadtxt('words_DE.txt', dtype='str')
+
+print(word_list)
 
 def getWord():
     '''
